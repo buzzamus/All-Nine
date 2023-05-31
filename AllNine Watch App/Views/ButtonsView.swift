@@ -10,9 +10,9 @@ import SwiftUI
 struct ButtonsView: View {
     @State var bothDice = false
     let buttonRows = [
-        ["1", "2", "3"],
-        ["4", "5", "6"],
-        ["7", "8", "9"]
+            ["1", "2", "3"],
+            ["4", "5", "6"],
+            ["7", "8", "9"]
         ]
     var body: some View {
         VStack {
@@ -32,9 +32,6 @@ struct ButtonsView: View {
                     print("Submit")
                 } label: {
                     Text("Submit")
-                }
-                Toggle(isOn: $bothDice) {
-                    Text("# of Dice")
                 }
             }
         }
