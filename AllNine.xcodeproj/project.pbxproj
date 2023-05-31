@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E66C56452A26D62A003976E5 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = E66C56442A26D62A003976E5 /* README.md */; };
+		E66C564A2A26D7C8003976E5 /* ButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66C56492A26D7C8003976E5 /* ButtonsView.swift */; };
+		E6D657F62A26E75900861534 /* DiceRollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D657F52A26E75900861534 /* DiceRollView.swift */; };
 		E6DE51D62A267436009217A5 /* AllNine Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = E6DE51D52A267436009217A5 /* AllNine Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		E6DE51DB2A267436009217A5 /* AllNineApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DE51DA2A267436009217A5 /* AllNineApp.swift */; };
 		E6DE51DD2A267436009217A5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DE51DC2A267436009217A5 /* ContentView.swift */; };
@@ -56,6 +59,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		E66C56442A26D62A003976E5 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		E66C56492A26D7C8003976E5 /* ButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsView.swift; sourceTree = "<group>"; };
+		E6D657F52A26E75900861534 /* DiceRollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceRollView.swift; sourceTree = "<group>"; };
 		E6DE51CF2A267436009217A5 /* AllNine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AllNine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6DE51D52A267436009217A5 /* AllNine Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AllNine Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6DE51DA2A267436009217A5 /* AllNineApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllNineApp.swift; sourceTree = "<group>"; };
@@ -94,9 +100,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E66C56482A26D772003976E5 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E6DE51DC2A267436009217A5 /* ContentView.swift */,
+				E66C56492A26D7C8003976E5 /* ButtonsView.swift */,
+				E6D657F52A26E75900861534 /* DiceRollView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E66C564B2A26DA77003976E5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		E6DE51C82A267436009217A5 = {
 			isa = PBXGroup;
 			children = (
+				E66C56442A26D62A003976E5 /* README.md */,
 				E6DE51D92A267436009217A5 /* AllNine Watch App */,
 				E6DE51EA2A267436009217A5 /* AllNine Watch AppTests */,
 				E6DE51F42A267436009217A5 /* AllNine Watch AppUITests */,
@@ -118,8 +142,9 @@
 		E6DE51D92A267436009217A5 /* AllNine Watch App */ = {
 			isa = PBXGroup;
 			children = (
+				E66C564B2A26DA77003976E5 /* Models */,
+				E66C56482A26D772003976E5 /* Views */,
 				E6DE51DA2A267436009217A5 /* AllNineApp.swift */,
-				E6DE51DC2A267436009217A5 /* ContentView.swift */,
 				E6DE51DE2A267436009217A5 /* Assets.xcassets */,
 				E6DE51E02A267436009217A5 /* Preview Content */,
 			);
@@ -276,6 +301,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E66C56452A26D62A003976E5 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,6 +336,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E6DE51DD2A267436009217A5 /* ContentView.swift in Sources */,
+				E66C564A2A26D7C8003976E5 /* ButtonsView.swift in Sources */,
+				E6D657F62A26E75900861534 /* DiceRollView.swift in Sources */,
 				E6DE51DB2A267436009217A5 /* AllNineApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
