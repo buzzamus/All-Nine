@@ -17,7 +17,6 @@
 		E6DE51DD2A267436009217A5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DE51DC2A267436009217A5 /* ContentView.swift */; };
 		E6DE51DF2A267436009217A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E6DE51DE2A267436009217A5 /* Assets.xcassets */; };
 		E6DE51E22A267436009217A5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E6DE51E12A267436009217A5 /* Preview Assets.xcassets */; };
-		E6DE51EC2A267436009217A5 /* AllNine_Watch_AppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DE51EB2A267436009217A5 /* AllNine_Watch_AppTests.swift */; };
 		E6DE51F62A267436009217A5 /* AllNine_Watch_AppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DE51F52A267436009217A5 /* AllNine_Watch_AppUITests.swift */; };
 		E6DE51F82A267436009217A5 /* AllNine_Watch_AppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DE51F72A267436009217A5 /* AllNine_Watch_AppUITestsLaunchTests.swift */; };
 /* End PBXBuildFile section */
@@ -73,7 +72,6 @@
 		E6DE51DE2A267436009217A5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E6DE51E12A267436009217A5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E6DE51E72A267436009217A5 /* AllNine Watch AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "AllNine Watch AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		E6DE51EB2A267436009217A5 /* AllNine_Watch_AppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllNine_Watch_AppTests.swift; sourceTree = "<group>"; };
 		E6DE51F12A267436009217A5 /* AllNine Watch AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "AllNine Watch AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6DE51F52A267436009217A5 /* AllNine_Watch_AppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllNine_Watch_AppUITests.swift; sourceTree = "<group>"; };
 		E6DE51F72A267436009217A5 /* AllNine_Watch_AppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllNine_Watch_AppUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -175,7 +173,6 @@
 		E6DE51EA2A267436009217A5 /* AllNine Watch AppTests */ = {
 			isa = PBXGroup;
 			children = (
-				E6DE51EB2A267436009217A5 /* AllNine_Watch_AppTests.swift */,
 				E662B6512A2825E800148004 /* GameManagerTest.swift */,
 			);
 			path = "AllNine Watch AppTests";
@@ -361,7 +358,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E6DE51EC2A267436009217A5 /* AllNine_Watch_AppTests.swift in Sources */,
 				E662B6522A2825E800148004 /* GameManagerTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
