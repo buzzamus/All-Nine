@@ -45,4 +45,24 @@ class GameManager {
             return true
         }
     }
+    
+    func isGameUnwinnable(rolledAmount: Int, currentIndex: Int = 0, currentSum: Int = 0) -> Bool {
+        if currentSum == rolledAmount {
+            // Combination found that adds up to the target
+            return true
+        } else if currentSum > rolledAmount || currentIndex >= availableNumbers.count {
+            // Target exceeded or reached the end of the list, no combination found
+            return false
+        }
+        
+        // Recursive call without including the current number
+        let excludeCurrent = isGameUnwinnable(rolledAmount: rolledAmount, currentIndex: currentIndex + 1, currentSum: currentSum)
+        
+        // Recursive call including the current number
+        let includeCurrent = isGameUnwinnable(rolledAmount: rolledAmount, currentIndex: currentIndex + 1, currentSum: currentSum + availableNumbers[currentIndex])
+        
+        // Return true if either combination (with or without the current number) is found
+        return excludeCurrent || includeCurrent
+    }
+
 }

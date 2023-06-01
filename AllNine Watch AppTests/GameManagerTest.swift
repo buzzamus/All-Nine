@@ -52,4 +52,14 @@ final class GameManagerTest: XCTestCase {
         gameManager.removePickedNumbers(choices: [3, 7, 8, 9])
         XCTAssertTrue(gameManager.canRollSingleDice())
     }
+    
+    func testIsGameWinnable() {
+        gameManager.removePickedNumbers(choices: [5, 6, 7, 8, 9])
+        // availableNumbers left are [1, 2, 3, 4]
+        XCTAssertTrue(gameManager.isGameUnwinnable(rolledAmount: 6))
+        
+        gameManager.removePickedNumbers(choices: [2, 4])
+        XCTAssertFalse(gameManager.isGameUnwinnable(rolledAmount: 5))
+        
+    }
 }
