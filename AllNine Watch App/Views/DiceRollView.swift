@@ -9,17 +9,20 @@ import SwiftUI
 
 struct DiceRollView: View {
     @State var diceToRoll = 2
+    @State var allowSingleDiceRoll = false
     var body: some View {
         Form {
             Picker("Number of Dice to Roll", selection: $diceToRoll) {
                 Text("Roll One Dice").tag(1)
                 Text("Roll Both Dice").tag(2)
             }
+            .disabled(true)
             Button {
-                print(diceToRoll)
+                print(allowSingleDiceRoll)
             } label: {
-                Text("Submit")
+                Text("Roll Dice")
             }
+            
         }
     }
 }

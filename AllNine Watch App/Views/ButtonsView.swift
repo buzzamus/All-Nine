@@ -8,7 +8,10 @@
 import SwiftUI
 
 struct ButtonsView: View {
+    // these all need to be moved to GameManager
+    var availableNumbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     @State var bothDice = false
+    @State var isInvalidSubmittedValue = false
     let buttonRows = [
             ["1", "2", "3"],
             ["4", "5", "6"],
@@ -30,8 +33,17 @@ struct ButtonsView: View {
             HStack {
                 Button {
                     print("Submit")
+                    if (2 + 2 == 4) {
+                        isInvalidSubmittedValue = true
+                    }
                 } label: {
                     Text("Submit")
+                }
+                .alert(isPresented: $isInvalidSubmittedValue) {
+                    Alert(
+                        title: Text("Invalid Amount Submitted"),
+                        message: Text("Your submission must match the amount you rolled.")
+                    )
                 }
             }
         }

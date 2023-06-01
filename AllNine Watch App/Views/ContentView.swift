@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     var currentRoll = 12
+    @State var submittedAmount = 0
     var body: some View {
         VStack {
             HStack {
