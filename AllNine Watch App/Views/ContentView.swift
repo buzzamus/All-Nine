@@ -8,12 +8,11 @@
 import SwiftUI
 
 struct ContentView: View {
-    var currentRoll = 12
-    @State var submittedAmount = 0
+    @StateObject var gameManager = GameManager()
     var body: some View {
         VStack {
             HStack {
-                Text("Roll: \(currentRoll)")
+                Text("Roll: \(gameManager.rolledValue)")
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.leading)
                     .padding(.leading)
@@ -21,6 +20,7 @@ struct ContentView: View {
             }
             ButtonsView()
         }
+        .environmentObject(gameManager)
     }
 }
 

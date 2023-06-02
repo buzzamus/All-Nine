@@ -8,10 +8,12 @@
 import SwiftUI
 
 struct ButtonsView: View {
-    // these all need to be moved to GameManager
-    var availableNumbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-    @State var bothDice = false
+    @EnvironmentObject var gameManager: GameManager
+    @State var submittedAmount = 0
     @State var isInvalidSubmittedValue = false
+    @State var isRollingDice = false
+    @State var pickedNumbers: [Int] = []
+    @State var currentChoices = [1, 2, 3, 4, 5, 6, 7, 8, 9]
     let buttonRows = [
             ["1", "2", "3"],
             ["4", "5", "6"],
@@ -23,19 +25,20 @@ struct ButtonsView: View {
                 HStack {
                     ForEach(row, id: \.self) { number in
                         Button {
-                            print(number)
+                            submittedAmount += Int(number)!
+                            let index = currentChoices.firstIndex(of: Int(number)!)
+                            currentChoices.remove(at: index!)
+                            pickedNumbers.append(Int(number)!)
                         } label: {
                             Text(number)
                         }
+                        .disabled(!currentChoices.contains(Int(number)!))
                     }
                 }
             }
             HStack {
                 Button {
-                    print("Submit")
-                    if (2 + 2 == 4) {
-                        isInvalidSubmittedValue = true
-                    }
+                    validateAndSubmitAmount()
                 } label: {
                     Text("Submit")
                 }
@@ -45,7 +48,29 @@ struct ButtonsView: View {
                         message: Text("Your submission must match the amount you rolled.")
                     )
                 }
+                Button("Clear") {
+                    submittedAmount = 0
+                    currentChoices = gameManager.availableNumbers
+                }
+                Text(String(submittedAmount))
             }
+        }.sheet(isPresented: $isRollingDice) {
+            DiceRollView()
+        }
+        .onChange(of: gameManager.availableNumbers) { _ in
+            currentChoices = gameManager.availableNumbers
+        }
+    }
+    
+    func validateAndSubmitAmount() {
+        if (submittedAmount != gameManager.rolledValue) {
+            isInvalidSubmittedValue = true
+            submittedAmount = 0
+            currentChoices = gameManager.availableNumbers
+        } else {
+            gameManager.removePickedNumbers(choices: pickedNumbers)
+            isRollingDice = true
+            submittedAmount = 0
         }
     }
 }
@@ -53,5 +78,6 @@ struct ButtonsView: View {
 struct ButtonsView_Previews: PreviewProvider {
     static var previews: some View {
         ButtonsView()
+            .environmentObject(GameManager())
     }
 }

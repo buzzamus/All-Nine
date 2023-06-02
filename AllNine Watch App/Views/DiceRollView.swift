@@ -8,21 +8,43 @@
 import SwiftUI
 
 struct DiceRollView: View {
-    @State var diceToRoll = 2
-    @State var allowSingleDiceRoll = false
+    @Environment(\.dismiss) var dismiss
+    @EnvironmentObject var gameManager: GameManager
+    @State var numberofDice = 2
+    @State var gameOver = false
     var body: some View {
         Form {
-            Picker("Number of Dice to Roll", selection: $diceToRoll) {
+            Picker("Number of Dice to Roll", selection: $numberofDice) {
                 Text("Roll One Dice").tag(1)
                 Text("Roll Both Dice").tag(2)
             }
-            .disabled(true)
+            .disabled(gameManager.mustRollBothDice())
             Button {
-                print(allowSingleDiceRoll)
+                gameManager.setNumberOfDice(dice: numberofDice)
+                gameManager.rollDice()
+                checkForGameOver(currentRoll: gameManager.rolledValue)
+                
+                if (gameOver) {
+                    numberofDice = 2
+                    gameManager.resetGameState()
+                } else {
+                    dismiss()
+                }
             } label: {
                 Text("Roll Dice")
             }
-            
+            .alert(isPresented: $gameOver) {
+                Alert(
+                    title: Text("Game over"),
+                    message: Text("No more winning combinations with roll of \(gameManager.rolledValue). New game starting.")
+                )
+            }
+        }
+    }
+    
+    func checkForGameOver(currentRoll: Int) {
+        if (gameManager.isGameWinnable(rolledAmount: currentRoll) == false) {
+            gameOver.toggle()
         }
     }
 }
@@ -30,5 +52,6 @@ struct DiceRollView: View {
 struct DiceRollView_Previews: PreviewProvider {
     static var previews: some View {
         DiceRollView()
+            .environmentObject(GameManager())
     }
 }

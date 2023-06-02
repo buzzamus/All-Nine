@@ -7,15 +7,15 @@
 
 import Foundation
 
-class GameManager {
-    private(set) var rolledValue: Int
+class GameManager: ObservableObject {
+    @Published private(set) var rolledValue: Int
+    @Published private(set) var availableNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
     private(set) var numberOfDice: Int
     private var submittedAmount: Int
-    private(set) var availableNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
     init() {
-        self.rolledValue = 0
         self.numberOfDice = 2
         self.submittedAmount = 0
+        self.rolledValue = Int.random(in: 1...12)
     }
     
     func checkSubmittedAmount(submit amount: Int) {
@@ -34,19 +34,23 @@ class GameManager {
     }
     
     func rollDice() {
-        // if 2 dice roll, return 2 numbers combined, else just do one dice roll
-    }
-    
-    func canRollSingleDice() -> Bool {
-        // this is ugly, but .contains([]) not supported prior to WatchOS 9.0 and my watch can only have 8.7
-        if (availableNumbers.contains(7) || availableNumbers.contains(8) || availableNumbers.contains(9)) {
-            return false
+        if (numberOfDice == 2) {
+            rolledValue = Int.random(in: 1...6) + Int.random(in: 1...6)
         } else {
-            return true
+            rolledValue = Int.random(in: 1...6)
         }
     }
     
-    func isGameUnwinnable(rolledAmount: Int, currentIndex: Int = 0, currentSum: Int = 0) -> Bool {
+    func mustRollBothDice() -> Bool {
+        // this is ugly, but .contains([]) not supported prior to WatchOS 9.0 and my watch can only have 8.7
+        if (availableNumbers.contains(7) || availableNumbers.contains(8) || availableNumbers.contains(9)) {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func isGameWinnable(rolledAmount: Int, currentIndex: Int = 0, currentSum: Int = 0) -> Bool {
         if currentSum == rolledAmount {
             // Combination found that adds up to the target
             return true
@@ -56,13 +60,30 @@ class GameManager {
         }
         
         // Recursive call without including the current number
-        let excludeCurrent = isGameUnwinnable(rolledAmount: rolledAmount, currentIndex: currentIndex + 1, currentSum: currentSum)
+        let excludeCurrent = isGameWinnable(rolledAmount: rolledAmount, currentIndex: currentIndex + 1, currentSum: currentSum)
         
         // Recursive call including the current number
-        let includeCurrent = isGameUnwinnable(rolledAmount: rolledAmount, currentIndex: currentIndex + 1, currentSum: currentSum + availableNumbers[currentIndex])
+        let includeCurrent = isGameWinnable(rolledAmount: rolledAmount, currentIndex: currentIndex + 1, currentSum: currentSum + availableNumbers[currentIndex])
         
         // Return true if either combination (with or without the current number) is found
         return excludeCurrent || includeCurrent
+    }
+    
+    func setNumberOfDice(dice: Int) {
+        if 1...2 ~= dice {
+            if (mustRollBothDice()) {
+                numberOfDice = 2
+            } else {
+                numberOfDice = dice
+            }
+        } else {
+            print("Error - number of dice set to invalid number. Should be 1 or 2. How did you get here?")
+        }
+    }
+    
+    func resetGameState() {
+        availableNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+        rollDice()
     }
 
 }

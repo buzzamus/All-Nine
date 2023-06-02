@@ -28,7 +28,7 @@ final class GameManagerTest: XCTestCase {
     }
     
     
-    func testRemovePickedNumbersHandlesPreviouslyPicked() {
+    func testRemovePickedNumbers_handlesPreviouslyPicked() {
         let choices = [1, 2, 3, 4, 5]
         gameManager.removePickedNumbers(choices: choices)
         
@@ -40,26 +40,67 @@ final class GameManagerTest: XCTestCase {
     }
     
     func testCanRollOneDice() {
-        XCTAssertFalse(gameManager.canRollSingleDice())
+        XCTAssertTrue(gameManager.mustRollBothDice())
         
         gameManager.removePickedNumbers(choices: [7, 9])
-        XCTAssertFalse(gameManager.canRollSingleDice())
+        XCTAssertTrue(gameManager.mustRollBothDice())
     }
     
-    func testCanRollOneDiceReturnsTrue() {
-        XCTAssertFalse(gameManager.canRollSingleDice())
+    func testCanRollOneDice_returnsFalse() {
+        XCTAssertTrue(gameManager.mustRollBothDice())
         
         gameManager.removePickedNumbers(choices: [3, 7, 8, 9])
-        XCTAssertTrue(gameManager.canRollSingleDice())
+        XCTAssertFalse(gameManager.mustRollBothDice())
     }
     
     func testIsGameWinnable() {
         gameManager.removePickedNumbers(choices: [5, 6, 7, 8, 9])
         // availableNumbers left are [1, 2, 3, 4]
-        XCTAssertTrue(gameManager.isGameUnwinnable(rolledAmount: 6))
+        XCTAssertTrue(gameManager.isGameWinnable(rolledAmount: 6))
         
         gameManager.removePickedNumbers(choices: [2, 4])
-        XCTAssertFalse(gameManager.isGameUnwinnable(rolledAmount: 5))
+        XCTAssertFalse(gameManager.isGameWinnable(rolledAmount: 5))
+    }
+    
+    func testIsGameWinnable_multipleCombinationTesting() {
+        gameManager.removePickedNumbers(choices: [2])
+        XCTAssertFalse(gameManager.isGameWinnable(rolledAmount: 2))
         
+        gameManager = GameManager()
+        
+        XCTAssertTrue(gameManager.isGameWinnable(rolledAmount: 3))
+        gameManager.removePickedNumbers(choices: [1, 2])
+        XCTAssertTrue(gameManager.isGameWinnable(rolledAmount: 3))
+        gameManager.removePickedNumbers(choices: [3])
+        XCTAssertTrue(gameManager.isGameWinnable(rolledAmount: 9))
+        gameManager.removePickedNumbers(choices: [4, 5])
+        XCTAssertTrue(gameManager.isGameWinnable(rolledAmount: 9))
+        gameManager.removePickedNumbers(choices: [9])
+        
+        XCTAssertFalse(gameManager.isGameWinnable(rolledAmount: 12))
+        
+    }
+    
+    func testSetNumberOfDice_whenOnlyTwoAllowed() {
+        XCTAssertTrue(gameManager.mustRollBothDice())
+        
+        gameManager.removePickedNumbers(choices: [7, 9])
+        gameManager.setNumberOfDice(dice: 1)
+        XCTAssertEqual(gameManager.numberOfDice, 2)
+    }
+    
+    func testSetNumberOfDice_whenOneIsAllowed() {
+        gameManager.removePickedNumbers(choices: [7, 8, 9])
+        gameManager.setNumberOfDice(dice: 1)
+        XCTAssertEqual(gameManager.numberOfDice, 1)
+        
+        gameManager.setNumberOfDice(dice: 2)
+        XCTAssertEqual(gameManager.numberOfDice, 2)
+    }
+    
+    func testSetNumberOfDice_handlesInvalidNumber() {
+        gameManager.removePickedNumbers(choices: [7, 8, 9])
+        gameManager.setNumberOfDice(dice: 4)
+        XCTAssertEqual(gameManager.numberOfDice, 2)
     }
 }
