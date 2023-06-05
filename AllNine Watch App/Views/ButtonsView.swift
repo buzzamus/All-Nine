@@ -64,9 +64,10 @@ struct ButtonsView: View {
     
     func validateAndSubmitAmount() {
         if (submittedAmount != gameManager.rolledValue) {
-            isInvalidSubmittedValue = true
             submittedAmount = 0
+            pickedNumbers = []
             currentChoices = gameManager.availableNumbers
+            isInvalidSubmittedValue = true
         } else {
             gameManager.removePickedNumbers(choices: pickedNumbers)
             isRollingDice = true
