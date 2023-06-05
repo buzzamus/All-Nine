@@ -14,11 +14,12 @@ struct DiceRollView: View {
     @State var gameOver = false
     var body: some View {
         Form {
-            Picker("Number of Dice to Roll", selection: $numberofDice) {
-                Text("Roll One Dice").tag(1)
-                Text("Roll Both Dice").tag(2)
+            if (!gameManager.mustRollBothDice()) {
+                Picker("Number of Dice to Roll", selection: $numberofDice) {
+                    Text("Roll One Dice").tag(1)
+                    Text("Roll Both Dice").tag(2)
+                }
             }
-            .disabled(gameManager.mustRollBothDice())
             Button {
                 gameManager.setNumberOfDice(dice: numberofDice)
                 gameManager.rollDice()
