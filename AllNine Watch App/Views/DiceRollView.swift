@@ -41,6 +41,8 @@ struct DiceRollView: View {
                 )
             }
         }
+        .navigationBarTitle("") //this must be empty
+        .navigationBarHidden(true)
     }
     
     func checkForGameOver(currentRoll: Int) {
