@@ -15,7 +15,7 @@ class GameManager: ObservableObject {
     init() {
         self.numberOfDice = 2
         self.submittedAmount = 0
-        self.rolledValue = Int.random(in: 1...12)
+        self.rolledValue = Int.random(in: 2...12)
     }
     
     func checkSubmittedAmount(submit amount: Int) {
