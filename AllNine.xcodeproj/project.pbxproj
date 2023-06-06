@@ -10,6 +10,7 @@
 		E662B6522A2825E800148004 /* GameManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E662B6512A2825E800148004 /* GameManagerTest.swift */; };
 		E66C56452A26D62A003976E5 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = E66C56442A26D62A003976E5 /* README.md */; };
 		E66C564A2A26D7C8003976E5 /* ButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66C56492A26D7C8003976E5 /* ButtonsView.swift */; };
+		E6AF22202A2F81BF007B8387 /* ButtonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AF221F2A2F81BF007B8387 /* ButtonViewModel.swift */; };
 		E6D657F62A26E75900861534 /* DiceRollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D657F52A26E75900861534 /* DiceRollView.swift */; };
 		E6D657F92A26EEDE00861534 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D657F82A26EEDE00861534 /* GameManager.swift */; };
 		E6DE51D62A267436009217A5 /* AllNine Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = E6DE51D52A267436009217A5 /* AllNine Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -63,6 +64,7 @@
 		E662B6512A2825E800148004 /* GameManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManagerTest.swift; sourceTree = "<group>"; };
 		E66C56442A26D62A003976E5 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		E66C56492A26D7C8003976E5 /* ButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsView.swift; sourceTree = "<group>"; };
+		E6AF221F2A2F81BF007B8387 /* ButtonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonViewModel.swift; sourceTree = "<group>"; };
 		E6D657F52A26E75900861534 /* DiceRollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceRollView.swift; sourceTree = "<group>"; };
 		E6D657F82A26EEDE00861534 /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
 		E6DE51CF2A267436009217A5 /* AllNine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AllNine.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -112,19 +114,13 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		E66C564B2A26DA77003976E5 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		E6D657F72A26EEC600861534 /* Utilities */ = {
+		E6AF221E2A2F81B2007B8387 /* models */ = {
 			isa = PBXGroup;
 			children = (
 				E6D657F82A26EEDE00861534 /* GameManager.swift */,
+				E6AF221F2A2F81BF007B8387 /* ButtonViewModel.swift */,
 			);
-			path = Utilities;
+			path = models;
 			sourceTree = "<group>";
 		};
 		E6DE51C82A267436009217A5 = {
@@ -152,8 +148,7 @@
 		E6DE51D92A267436009217A5 /* AllNine Watch App */ = {
 			isa = PBXGroup;
 			children = (
-				E6D657F72A26EEC600861534 /* Utilities */,
-				E66C564B2A26DA77003976E5 /* Models */,
+				E6AF221E2A2F81B2007B8387 /* models */,
 				E66C56482A26D772003976E5 /* Views */,
 				E6DE51DA2A267436009217A5 /* AllNineApp.swift */,
 				E6DE51DE2A267436009217A5 /* Assets.xcassets */,
@@ -346,6 +341,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6AF22202A2F81BF007B8387 /* ButtonViewModel.swift in Sources */,
 				E6DE51DD2A267436009217A5 /* ContentView.swift in Sources */,
 				E66C564A2A26D7C8003976E5 /* ButtonsView.swift in Sources */,
 				E6D657F62A26E75900861534 /* DiceRollView.swift in Sources */,

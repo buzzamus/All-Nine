@@ -10,8 +10,9 @@ import Foundation
 class GameManager: ObservableObject {
     @Published private(set) var rolledValue: Int
     @Published private(set) var availableNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-    private(set) var numberOfDice: Int
-    private var submittedAmount: Int
+    @Published private(set) var numberOfDice: Int
+    @Published private var submittedAmount: Int
+    @Published private(set) var gameWon = false
     init() {
         self.numberOfDice = 2
         self.submittedAmount = 0
@@ -82,8 +83,10 @@ class GameManager: ObservableObject {
     }
     
     func resetGameState() {
+        gameWon = true
         availableNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
         rollDice()
+        gameWon = false
     }
 
 }

@@ -9,9 +9,10 @@ import SwiftUI
 
 struct DiceRollView: View {
     @Environment(\.dismiss) var dismiss
-    @EnvironmentObject var gameManager: GameManager
+    @ObservedObject var gameManager: GameManager
     @State var numberofDice = 2
     @State var gameOver = false
+    @State var buttonViewModel: ButtonViewModel
     var body: some View {
         Form {
             if (!gameManager.mustRollBothDice()) {
@@ -28,6 +29,8 @@ struct DiceRollView: View {
                 if (gameOver) {
                     numberofDice = 2
                     gameManager.resetGameState()
+                    buttonViewModel.pickedNumbers = []
+                    buttonViewModel.currentChoices = gameManager.availableNumbers
                 } else {
                     dismiss()
                 }
@@ -54,7 +57,6 @@ struct DiceRollView: View {
 
 struct DiceRollView_Previews: PreviewProvider {
     static var previews: some View {
-        DiceRollView()
-            .environmentObject(GameManager())
+        DiceRollView(gameManager: GameManager(), buttonViewModel: ButtonViewModel())
     }
 }
