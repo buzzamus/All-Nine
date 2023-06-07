@@ -30,16 +30,13 @@ struct ButtonsView: View {
             }
             ForEach(buttonRows, id: \.self) { row in
                 HStack {
-                    ForEach(row, id: \.self) { number in
+                    ForEach(row, id: \.self) { choice in
                         Button {
-                            submittedAmount += Int(number)!
-                            let index = buttonViewModel.currentChoices.firstIndex(of: Int(number)!)
-                            buttonViewModel.currentChoices.remove(at: index!)
-                            buttonViewModel.pickedNumbers.append(Int(number)!)
+                            submitSelection(choice)
                         } label: {
-                            Text(number)
+                            Text(choice)
                         }
-                        .disabled(!buttonViewModel.currentChoices.contains(Int(number)!))
+                        .disabled(!buttonViewModel.currentChoices.contains(Int(choice)!))
                     }
                 }
             }
@@ -71,29 +68,38 @@ struct ButtonsView: View {
             DiceRollView(gameManager: gameManager, buttonViewModel: buttonViewModel)
         }
         .onChange(of: gameManager.gameWon) { _ in
-            buttonViewModel.currentChoices = gameManager.availableNumbers
-            buttonViewModel.pickedNumbers = []
+            resetPickedNumbers()
         }
     }
     
     func validateAndSubmitAmount() {
         if (submittedAmount != gameManager.rolledValue) {
             submittedAmount = 0
-            buttonViewModel.pickedNumbers = []
-            buttonViewModel.currentChoices = gameManager.availableNumbers
+            resetPickedNumbers()
             isInvalidSubmittedValue = true
         } else {
             gameManager.removePickedNumbers(choices: buttonViewModel.pickedNumbers)
             
             if (gameManager.availableNumbers.isEmpty) {
                 gameManager.resetGameState()
-                buttonViewModel.pickedNumbers = []
-                buttonViewModel.currentChoices = gameManager.availableNumbers
+                resetPickedNumbers()
                 gameWon.toggle()
             }
             isRollingDice = true
             submittedAmount = 0
         }
+    }
+    
+    func resetPickedNumbers() {
+        buttonViewModel.pickedNumbers = []
+        buttonViewModel.currentChoices = gameManager.availableNumbers
+    }
+    
+    func submitSelection(_ number: String) {
+        submittedAmount += Int(number)!
+        let index = buttonViewModel.currentChoices.firstIndex(of: Int(number)!)
+        buttonViewModel.currentChoices.remove(at: index!)
+        buttonViewModel.pickedNumbers.append(Int(number)!)
     }
 }
 
