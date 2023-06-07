@@ -11,19 +11,10 @@ class GameManager: ObservableObject {
     @Published private(set) var rolledValue: Int
     @Published private(set) var availableNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
     @Published private(set) var numberOfDice: Int
-    @Published private var submittedAmount: Int
     @Published private(set) var gameWon = false
     init() {
         self.numberOfDice = 2
-        self.submittedAmount = 0
         self.rolledValue = Int.random(in: 2...12)
-    }
-    
-    func checkSubmittedAmount(submit amount: Int) {
-        if (amount != rolledValue) {
-            // return error to have view give response to player to submit correct numbers
-            
-        }
     }
     
     func removePickedNumbers(choices: [Int]) {
